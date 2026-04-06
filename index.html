@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <title>Frontend Mentor | Fylo landing page with two column layout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Hide animatable elements before GSAP initialises to avoid flash */
+    .gsap-hidden { opacity: 0; }
+
+    /* ── Hover base states ── */
+    .header__nav a          { position: relative; display: inline-block; }
+    .header__logo           { display: inline-block; }
+
+    /* Nav underline draw */
+    .header__nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -3px;
+      width: 100%; height: 2px;
+      background: var(--bright-blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    }
+    .header__nav a:hover::after { transform: scaleX(1); }
+
+    /* Buttons – glow ring */
+    .hero__form button,
+    .cta-section__form button {
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    .hero__form button::before,
+    .cta-section__form button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.15);
+      transform: translateX(-100%) skewX(-15deg);
+      transition: transform 0.45s ease;
+    }
+    .hero__form button:hover::before,
+    .cta-section__form button:hover::before {
+      transform: translateX(110%) skewX(-15deg);
+    }
+
+    /* Features link arrow nudge */
+    .features__link img { transition: transform 0.3s cubic-bezier(.4,0,.2,1); }
+    .features__link:hover img { transform: translateX(6px); }
+
+    /* Testimonial tilt container */
+    .testimonial {
+      transition: box-shadow 0.35s ease;
+      will-change: transform;
+    }
+
+    /* Social icon fill on hover */
+    .footer__social a svg {
+      transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* Footer nav link slide */
+    .footer__nav a { position: relative; display: inline-block; }
+    .footer__nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 100%; height: 1px;
+      background: var(--bright-blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    }
+    .footer__nav a:hover::after { transform: scaleX(1); }
+
+    /* Contact items */
+    .footer__contact-item img {
+      transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+    }
+    .footer__contact-item:hover img { transform: scale(1.25) rotate(-8deg); }
+
+    /* Hero & features illustrations */
+    .hero__image img,
+    .features__image img {
+      transition: filter 0.4s ease;
+      will-change: filter;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="header__logo">
+        <img src="images/logo.svg" alt="Fylo">
+      </a>
+      <nav class="header__nav">
+        <a href="#">Features</a>
+        <a href="#">Team</a>
+        <a href="#">Sign In</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__text">
+        <h1>All your files in one secure location, accessible anywhere.</h1>
+        <p>Fylo stores your most important files in one secure location. Access them wherever you need, share and collaborate with friends, family, and co-workers.</p>
+        <form class="hero__form" novalidate>
+          <div class="form-group">
+            <input type="email" placeholder="Enter your email..." aria-label="Email address">
+            <span class="error-msg">Please check your email</span>
+          </div>
+          <button type="submit">Get Started</button>
+        </form>
+      </div>
+      <div class="hero__image">
+        <img src="images/illustration-1.svg" alt="Files illustration">
+      </div>
+    </div>
+  </section>
+
+  <!-- CURVE DIVIDER -->
+  <div class="curve">
+    <picture>
+      <source media="(min-width: 768px)" srcset="images/bg-curve-desktop.svg">
+      <img src="images/bg-curve-mobile.svg" alt="">
+    </picture>
+  </div>
+
+  <!-- FEATURES SECTION -->
+  <section class="features">
+    <div class="container features__inner">
+      <div class="features__text">
+        <h2>Stay productive, wherever you are</h2>
+        <p>Never let location be an issue when accessing your files. Fylo has you covered for all of your file storage needs.</p>
+        <p>Securely share files and folders with friends, family and colleagues for live collaboration. No email attachments required!</p>
+        <a href="#" class="features__link">
+          <span>See how Fylo works</span>
+          <img src="images/icon-arrow.svg" alt="">
+        </a>
+        <div class="testimonial">
+          <img src="images/icon-quotes.svg" alt="" class="testimonial__quotes">
+          <p class="testimonial__text">Fylo has improved our team productivity by an order of magnitude. Since making the switch our team has become a well-oiled collaboration machine.</p>
+          <div class="testimonial__author">
+            <img src="images/avatar-testimonial.jpg" alt="Kyle Burton">
+            <div>
+              <p class="testimonial__name">Kyle Burton</p>
+              <p class="testimonial__title">Founder &amp; CEO, Huddle</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="features__image">
+        <img src="images/illustration-2.svg" alt="Productivity illustration">
+      </div>
+    </div>
+  </section>
+
+  <!-- EARLY ACCESS CTA SECTION -->
+  <section class="cta-section">
+    <div class="container cta-section__inner">
+      <div class="cta-section__text">
+        <h2>Get early access today</h2>
+        <p>It only takes a minute to sign up and our free starter tier is extremely generous. If you have any questions, our support team would be happy to help you.</p>
+      </div>
+      <div class="cta-section__form">
+        <form novalidate>
+          <input type="email" placeholder="email@example.com" aria-label="Email address">
+          <button type="submit">Get Started For Free</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__logo">
+        <img src="images/logo.svg" alt="Fylo">
+      </div>
+      <div class="footer__columns">
+        <div class="footer__contact">
+          <a href="tel:+15431234567" class="footer__contact-item">
+            <img src="images/icon-phone.svg" alt="">
+            <span>+1-543-123-4567</span>
+          </a>
+          <a href="mailto:example@fylo.com" class="footer__contact-item">
+            <img src="images/icon-email.svg" alt="">
+            <span>example@fylo.com</span>
+          </a>
+        </div>
+        <nav class="footer__nav footer__nav--col1">
+          <a href="#">About Us</a>
+          <a href="#">Jobs</a>
+          <a href="#">Press</a>
+          <a href="#">Blog</a>
+        </nav>
+        <nav class="footer__nav footer__nav--col2">
+          <a href="#">Contact Us</a>
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+        </nav>
+        <div class="footer__social">
+          <a href="#" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="attribution">Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a href="#">Your Name Here</a>.</p>
+  </footer>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ── Helpers ── */
+    const fadeUp = (targets, extra = {}) =>
+      gsap.from(targets, {
+        y: 50, opacity: 0, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: targets, start: 'top 88%' },
+        ...extra
+      });
+
+    const fadeIn = (targets, extra = {}) =>
+      gsap.from(targets, {
+        opacity: 0, duration: 0.9, ease: 'power2.out',
+        scrollTrigger: { trigger: targets, start: 'top 88%' },
+        ...extra
+      });
+
+    /* ── Header ── */
+    gsap.from('.header__logo', { x: -40, opacity: 0, duration: 0.7, ease: 'power3.out', delay: 0.1 });
+    gsap.from('.header__nav a', {
+      y: -20, opacity: 0, duration: 0.5, ease: 'power2.out',
+      stagger: 0.12, delay: 0.2
+    });
+
+    /* ── Hero ── */
+    gsap.from('.hero__text h1', { y: 40, opacity: 0, duration: 0.9, ease: 'power3.out', delay: 0.3 });
+    gsap.from('.hero__text p',  { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.5 });
+    gsap.from('.hero__form',    { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', delay: 0.65 });
+    gsap.from('.hero__image',   { x: 60, opacity: 0, duration: 1,   ease: 'power3.out', delay: 0.4 });
+
+    /* ── Curve ── */
+    gsap.from('.curve', {
+      scaleX: 0.8, opacity: 0, duration: 0.8, ease: 'power2.out',
+      scrollTrigger: { trigger: '.curve', start: 'top 95%' }
+    });
+
+    /* ── Features ── */
+    gsap.from('.features__image', {
+      x: 60, opacity: 0, duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: '.features__inner', start: 'top 80%' }
+    });
+    gsap.from('.features__text h2', {
+      y: 40, opacity: 0, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: '.features__text h2', start: 'top 85%' }
+    });
+    gsap.from('.features__text p', {
+      y: 30, opacity: 0, duration: 0.7, ease: 'power2.out', stagger: 0.15,
+      scrollTrigger: { trigger: '.features__text', start: 'top 80%' }
+    });
+    gsap.from('.features__link', {
+      y: 20, opacity: 0, duration: 0.6, ease: 'power2.out',
+      scrollTrigger: { trigger: '.features__link', start: 'top 88%' }
+    });
+
+    /* ── Testimonial ── */
+    gsap.from('.testimonial', {
+      y: 40, opacity: 0, scale: 0.95, duration: 0.8, ease: 'back.out(1.4)',
+      scrollTrigger: { trigger: '.testimonial', start: 'top 88%' }
+    });
+
+    /* ── CTA Section ── */
+    gsap.from('.cta-section__text', {
+      x: -50, opacity: 0, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: '.cta-section', start: 'top 80%' }
+    });
+    gsap.from('.cta-section__form', {
+      x: 50, opacity: 0, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: '.cta-section', start: 'top 80%' }
+    });
+
+    /* ── Footer ── */
+    gsap.from('.footer__logo', {
+      y: 30, opacity: 0, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: '.footer', start: 'top 90%' }
+    });
+    gsap.from('.footer__contact-item', {
+      x: -20, opacity: 0, duration: 0.6, ease: 'power2.out', stagger: 0.12,
+      scrollTrigger: { trigger: '.footer__contact', start: 'top 90%' }
+    });
+    gsap.from('.footer__nav a', {
+      y: 15, opacity: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08,
+      scrollTrigger: { trigger: '.footer__columns', start: 'top 90%' }
+    });
+    gsap.from('.footer__social a', {
+      scale: 0, opacity: 0, duration: 0.5, ease: 'back.out(1.7)', stagger: 0.1,
+      scrollTrigger: { trigger: '.footer__social', start: 'top 92%' }
+    });
+
+    /* ════════════════════════════════════════
+       PREMIUM HOVER EFFECTS (GSAP)
+    ════════════════════════════════════════ */
+
+    /* ── Logo – gentle float ── */
+    const logo = document.querySelector('.header__logo');
+    logo.addEventListener('mouseenter', () =>
+      gsap.to(logo, { y: -4, scale: 1.05, duration: 0.35, ease: 'power2.out' }));
+    logo.addEventListener('mouseleave', () =>
+      gsap.to(logo, { y: 0,  scale: 1,    duration: 0.4,  ease: 'elastic.out(1,0.5)' }));
+
+    /* ── Nav links – lift + colour ── */
+    document.querySelectorAll('.header__nav a').forEach(el => {
+      el.addEventListener('mouseenter', () =>
+        gsap.to(el, { y: -3, duration: 0.25, ease: 'power2.out' }));
+      el.addEventListener('mouseleave', () =>
+        gsap.to(el, { y: 0,  duration: 0.35, ease: 'elastic.out(1,0.6)' }));
+    });
+
+    /* ── Hero button – lift + shadow pulse ── */
+    document.querySelectorAll('.hero__form button, .cta-section__form button').forEach(btn => {
+      btn.addEventListener('mouseenter', () =>
+        gsap.to(btn, { y: -3, scale: 1.03, boxShadow: '0 12px 28px rgba(58,115,245,0.45)', duration: 0.3, ease: 'power2.out' }));
+      btn.addEventListener('mouseleave', () =>
+        gsap.to(btn, { y: 0,  scale: 1,    boxShadow: '0 0px 0px rgba(0,0,0,0)',           duration: 0.4, ease: 'elastic.out(1,0.5)' }));
+    });
+
+    /* ── Hero image – subtle float loop on hover ── */
+    const heroImg = document.querySelector('.hero__image img');
+    let heroFloat;
+    heroImg.addEventListener('mouseenter', () => {
+      heroFloat = gsap.to(heroImg, {
+        y: -12, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1,
+        filter: 'drop-shadow(0 20px 30px rgba(58,115,245,0.25))'
+      });
+    });
+    heroImg.addEventListener('mouseleave', () => {
+      heroFloat && heroFloat.kill();
+      gsap.to(heroImg, { y: 0, filter: 'drop-shadow(0 0px 0px rgba(0,0,0,0))', duration: 0.5, ease: 'power2.out' });
+    });
+
+    /* ── Features image – same float ── */
+    const featImg = document.querySelector('.features__image img');
+    let featFloat;
+    featImg.addEventListener('mouseenter', () => {
+      featFloat = gsap.to(featImg, {
+        y: -10, duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1,
+        filter: 'drop-shadow(0 18px 28px rgba(29,188,155,0.22))'
+      });
+    });
+    featImg.addEventListener('mouseleave', () => {
+      featFloat && featFloat.kill();
+      gsap.to(featImg, { y: 0, filter: 'drop-shadow(0 0px 0px rgba(0,0,0,0))', duration: 0.5, ease: 'power2.out' });
+    });
+
+    /* ── Features link – arrow bounce ── */
+    const featLink = document.querySelector('.features__link');
+    const featArrow = featLink.querySelector('img');
+    featLink.addEventListener('mouseenter', () =>
+      gsap.to(featArrow, { x: 8, duration: 0.3, ease: 'power2.out' }));
+    featLink.addEventListener('mouseleave', () =>
+      gsap.to(featArrow, { x: 0, duration: 0.5, ease: 'elastic.out(1,0.5)' }));
+
+    /* ── Testimonial – 3-D tilt on mouse move ── */
+    const card = document.querySelector('.testimonial');
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const cx = r.left + r.width  / 2;
+      const cy = r.top  + r.height / 2;
+      const dx = (e.clientX - cx) / (r.width  / 2);
+      const dy = (e.clientY - cy) / (r.height / 2);
+      gsap.to(card, {
+        rotateY: dx * 8, rotateX: -dy * 8,
+        scale: 1.03,
+        boxShadow: `${-dx * 12}px ${dy * 12}px 40px rgba(0,0,0,0.18)`,
+        duration: 0.4, ease: 'power2.out',
+        transformPerspective: 800
+      });
+    });
+    card.addEventListener('mouseleave', () =>
+      gsap.to(card, {
+        rotateY: 0, rotateX: 0, scale: 1,
+        boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
+        duration: 0.6, ease: 'elastic.out(1,0.5)',
+        transformPerspective: 800
+      }));
+
+    /* ── Social icons – spring scale + rotate ── */
+    document.querySelectorAll('.footer__social a').forEach(icon => {
+      icon.addEventListener('mouseenter', () =>
+        gsap.to(icon, { scale: 1.25, rotate: 8, duration: 0.3, ease: 'back.out(2)' }));
+      icon.addEventListener('mouseleave', () =>
+        gsap.to(icon, { scale: 1,    rotate: 0, duration: 0.5, ease: 'elastic.out(1,0.5)' }));
+    });
+
+    /* ── Footer contact items – slide right ── */
+    document.querySelectorAll('.footer__contact-item').forEach(item => {
+      item.addEventListener('mouseenter', () =>
+        gsap.to(item, { x: 6, duration: 0.25, ease: 'power2.out' }));
+      item.addEventListener('mouseleave', () =>
+        gsap.to(item, { x: 0, duration: 0.4,  ease: 'elastic.out(1,0.6)' }));
+    });
+
+    /* ── Footer nav links – slide right ── */
+    document.querySelectorAll('.footer__nav a').forEach(link => {
+      link.addEventListener('mouseenter', () =>
+        gsap.to(link, { x: 5, duration: 0.25, ease: 'power2.out' }));
+      link.addEventListener('mouseleave', () =>
+        gsap.to(link, { x: 0, duration: 0.4,  ease: 'elastic.out(1,0.6)' }));
+    });
+  </script>
+</body>
+</html>
