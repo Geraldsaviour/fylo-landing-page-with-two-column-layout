@@ -1,6 +1,10 @@
 # Frontend Mentor - Fylo landing page with two column layout solution
 
-This is a solution to the [Fylo landing page with two column layout challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/fylo-landing-page-with-two-column-layout-5ca5ef041e82137ec91a50f5). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+## 🔗 Live Site
+
+**[https://fylo-landing-page-with-two-column-l-tau.vercel.app/](https://fylo-landing-page-with-two-column-l-tau.vercel.app/)**
+
+This is a solution to the [Fylo landing page with two column layout challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/fylo-landing-page-with-two-column-layout-5ca5ef041e82137ec91a50f5).
 
 ## Table of contents
 
@@ -14,7 +18,6 @@ This is a solution to the [Fylo landing page with two column layout challenge on
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
@@ -31,8 +34,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [GitHub](https://github.com/Geraldsaviour/fylo-landing-page-with-two-column-layout)
+- Live Site URL: [https://fylo-landing-page-with-two-column-l-tau.vercel.app/](https://fylo-landing-page-with-two-column-l-tau.vercel.app/)
 
 ## My process
 
@@ -57,7 +60,3 @@ I plan to further explore GSAP for more complex transitions and look into improv
 
 - Website - [Geraldsaviour](https://github.com/Geraldsaviour)
 - Frontend Mentor - [@Geraldsaviour](https://www.frontendmentor.io/profile/Geraldsaviour)
-
-## Acknowledgments
-
-Thanks to Frontend Mentor for the amazing challenge!
